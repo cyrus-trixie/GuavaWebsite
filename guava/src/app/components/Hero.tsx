@@ -6,8 +6,8 @@ export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="bg-black overflow-x-hidden">
-      <div className="relative isolate px-6 pt-4 lg:px-8 overflow-x-hidden">
+    <div className="bg-black overflow-x-hidden overflow-y-hidden">
+      <div className="relative isolate px-6 pt-4 pb-16 lg:px-8 overflow-x-hidden">
         {/* Animated top background pattern */}
         <motion.div
           aria-hidden="true"
@@ -43,7 +43,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Hero content */}
-        <div className="mx-auto max-w-2xl py-32">
+        <div className="mx-auto max-w-2xl">
           <motion.div 
             className="hidden sm:mb-8 sm:flex sm:justify-center"
             initial={{ opacity: 0, y: -20 }}
