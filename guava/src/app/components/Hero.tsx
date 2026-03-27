@@ -138,38 +138,6 @@ export default function Hero() {
             }}
           />
         </motion.div>
-        
-        {/* Additional floating elements for visual interest */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 h-16 w-16 rounded-full bg-[#DB3246] opacity-10 blur-xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          style={{ willChange: 'transform' }}
-        />
-        
-        <motion.div
-          className="absolute bottom-1/3 right-1/3 h-24 w-24 rounded-full bg-[#DB3246] opacity-10 blur-xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 20, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-          style={{ willChange: 'transform' }}
-        />
       </div>
     </div>
   )
