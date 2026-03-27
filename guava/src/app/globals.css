@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* use custom fonts - Nexa located in  src/app/fonts */
+@font-face {
+    font-family: "NexaBold";
+    src: url("/fonts/Nexa-Heavy.ttf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "NexaLight";
+    src: url("/fonts/Nexa-ExtraLight.ttf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+/* regular */
+@font-face {
+    font-family: "NexaRegular";
+    src: url("/fonts/Nexa-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6, li, a {
+  font-family: "NexaBold", sans-serif;
+}
+
+p, span, button, div {
+  font-family: "NexaRegular", sans-serif;
+}
