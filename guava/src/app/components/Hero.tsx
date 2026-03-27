@@ -107,7 +107,7 @@ export default function Hero() {
         {/* Animated bottom background pattern */}
         <motion.div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          className="absolute inset-x-0 top-1/2 -z-10 transform-gpu overflow-hidden blur-3xl"
           animate={{
             x: [0, -25, 0],
             y: [0, -15, 0],
