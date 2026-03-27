@@ -6,8 +6,8 @@ export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="bg-black">
-      <div className="relative isolate px-6 pt-4 lg:px-8">
+    <div className="bg-black overflow-x-hidden">
+      <div className="relative isolate px-6 pt-4 lg:px-8 overflow-x-hidden">
         {/* Animated top background pattern */}
         <motion.div
           aria-hidden="true"
@@ -22,6 +22,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         >
           <motion.div
             style={{
@@ -117,6 +118,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         >
           <motion.div
             style={{
@@ -150,6 +152,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
         
         <motion.div
@@ -165,6 +168,7 @@ export default function Hero() {
             ease: "easeInOut",
             delay: 1
           }}
+          style={{ willChange: 'transform' }}
         />
       </div>
     </div>
