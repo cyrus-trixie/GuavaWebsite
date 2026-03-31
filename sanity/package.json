@@ -1,0 +1,22 @@
+{
+  "name": "sanity",
+  "version": "1.0.0",
+  "description": "Sanity Studio for Guava Creative",
+  "main": "index.js",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@sanity/image-url": "^2.1.0",
+    "@sanity/vision": "^5.18.0",
+    "sanity": "^5.18.0",
+    "styled-components": "^6.3.12"
+  }
+}

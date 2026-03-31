@@ -84,7 +84,7 @@ export default function AboutGuavaCreative() {
     );
   }
 
-  const titleParts = about.title.split('\n');
+  const titleParts: string[] = about.title.split('\n');
 
   const featuresList = [
     { icon: Rocket, title: "Bold Strategy", description: "Visionary ideas backed by market intelligence and fearless execution." },
@@ -117,7 +117,7 @@ export default function AboutGuavaCreative() {
               variants={itemVariants}
               className="mt-3 font-bold tracking-tight text-gray-900 text-5xl"
             >
-              {titleParts.map((line, i) => (
+              {titleParts.map((line: string, i: number) => (
                 <span key={i} className={i === 1 ? "block text-[#DB3246]" : "block"}>
                   {line}
                 </span>
