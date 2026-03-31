@@ -1,8 +1,34 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
+interface HeroData {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
 export default function Hero() {
+  const [hero, setHero] = useState<HeroData | null>(null);
+
+  useEffect(() => {
+    async function fetchHero() {
+      const res = await fetch('/api/hero');
+      const data = await res.json();
+      setHero(data);
+    }
+    fetchHero();
+  }, []);
+
+  if (!hero) {
+    return (
+      <div className="bg-black overflow-hidden h-[calc(100dvh-var(--header-height,80px))] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-black overflow-hidden h-[calc(100dvh-var(--header-height,80px))]">
       <div className="relative isolate px-6 lg:px-8 overflow-hidden flex items-center justify-center h-full w-full">
@@ -42,21 +68,6 @@ export default function Hero() {
 
         {/* Hero content */}
         <div className="mx-auto max-w-2xl w-full pt-16 pb-4">
-          <motion.div
-            className="hidden sm:mb-8 sm:flex sm:justify-center"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="relative rounded-full px-3 py-1 text-sm/6 text-white ring-1 ring-white hover:ring-gray-900/20">
-              Creative by nature. Precise by design.{' '}
-              <a href="#" className="font-semibold text-[#DB3246]">
-                <span aria-hidden="true" className="absolute inset-0" />
-                Read more <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-          </motion.div>
-
           <div className="text-center">
             <motion.h1
               className="text-5xl font-semibold tracking-tight text-balance text-white"
@@ -64,7 +75,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Creative by nature. Precise by design.
+              {hero.title}
             </motion.h1>
 
             <motion.p
@@ -73,7 +84,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              We craft digital experiences that are fast, fearless, and unforgettable. Strategy meets storytelling. Design meets impact.
+              {hero.subtitle}
             </motion.p>
 
             <motion.div
@@ -83,12 +94,12 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <motion.a
-                href="#"
+                href={hero.buttonLink}
                 className="rounded-full bg-[#DB3246] px-7 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-[#DB3246] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Build with Guava
+                {hero.buttonText}
               </motion.a>
               <motion.a
                 href="#"

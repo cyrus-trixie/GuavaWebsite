@@ -11,9 +11,13 @@ import {
   BarChart2
 } from 'lucide-react';
 
-// Custom icons that match our aesthetic better than heroicons
+interface Service {
+  name: string;
+  description: string;
+  icon: string;
+}
+
 const icons: Record<string, React.ElementType> = {
-  ArrowUpRight, 
   Lightbulb,
   Globe,
   Video,
@@ -22,70 +26,33 @@ const icons: Record<string, React.ElementType> = {
   BarChart2
 };
 
-const features = [
-  {
-    name: 'Brand Strategy & Identity',
-    description:
-      'We do not just design logos — we architect meaning. From tone to typography, we craft identities that cut through noise and burn into memory.',
-    icon: 'Lightbulb' as const,
-    delay: 0,
-  },
-  {
-    name: 'Web Design & Development',
-    description:
-      'Pixel-perfect design meets performant code. We build bespoke, responsive websites that convert, engage, and scale with your business.',
-    icon: 'Globe' as const,
-    delay: 0.1,
-  },
-  {
-    name: 'Content Production',
-    description:
-      'From sharp copy to cinematic video, we create content that speaks with your voice and moves your audience — emotionally and strategically.',
-    icon: 'Video' as const,
-    delay: 0.2,
-  },
-  {
-    name: 'UI/UX Design',
-    description:
-      'We do purposeful. Interfaces that feel inevitable, flows that feel frictionless, and experiences users don not forget.',
-    icon: 'MousePointerClick' as const,
-    delay: 0.3,
-  },
-  {
-    name: 'Digital Marketing & Ads',
-    description:
-      'We turn attention into action. From Google Ads to social strategy, we engineer campaigns that drive traffic, capture leads, and build momentum.',
-    icon: 'Megaphone' as const,
-    delay: 0.4,
-  },
-  {
-    name: 'SEO & Analytics',
-    description:
-      'Visibility is power. We optimize every pixel and line of code to rank, track, and refine—so your brand grows with intelligence, not guesswork.',
-    icon: 'BarChart2' as const,
-    delay: 0.5,
-  },
-];
-  
-
 export default function Services() {
+  const [services, setServices] = useState<Service[]>([]);
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    // Set isInView to true after component mounts to trigger animations
+    async function fetchServices() {
+      const res = await fetch('/api/services');
+      const data = await res.json();
+      setServices(data);
+    }
+    fetchServices();
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIsInView(true);
     }, 300);
     return () => clearTimeout(timer);
   }, []);
 
-  // Animation variants
+  // Animation variants with TypeScript fixes
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        when: "beforeChildren",
+        when: "beforeChildren" as const,
         staggerChildren: 0.2,
       }
     }
@@ -96,10 +63,7 @@ export default function Services() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { 
-        duration: 0.8, 
-        ease: [0.25, 0.1, 0.25, 1.0],
-      }
+      transition: { duration: 0.8, ease: "easeInOut" } as any
     }
   };
 
@@ -108,11 +72,7 @@ export default function Services() {
     visible: (delay: number) => ({
       opacity: 1,
       y: 0,
-      transition: { 
-        duration: 0.7, 
-        ease: [0.25, 0.1, 0.25, 1.0],
-        delay: delay 
-      }
+      transition: { duration: 0.7, ease: "easeInOut", delay } as any
     })
   };
 
@@ -121,12 +81,7 @@ export default function Services() {
     visible: { 
       scale: 1, 
       opacity: 1,
-      transition: { 
-        duration: 0.5,
-        type: "spring",
-        stiffness: 200,
-        damping: 10
-      }
+      transition: { duration: 0.5, type: "spring", stiffness: 200, damping: 10 } as any
     },
     hover: { 
       scale: 1.1,
@@ -150,6 +105,14 @@ export default function Services() {
       <div className="absolute -right-24 bottom-1/4 w-96 h-96 rounded-full bg-gradient-to-l from-[#DB3246] to-orange-400 opacity-5 blur-3xl"></div>
     </div>
   );
+
+  if (!services.length) {
+    return (
+      <div className="relative bg-white pb-12 overflow-hidden">
+        <div className="mx-auto max-w-6xl px-6 lg:px-0 text-center">Loading services...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative bg-white pb-12 overflow-hidden">
@@ -196,14 +159,14 @@ export default function Services() {
           variants={containerVariants}
         >
           <dl className="grid max-w-xl grid-cols-1 gap-x-12 gap-y-8 lg:max-w-none lg:grid-cols-3 lg:gap-y-8">
-            {features.map((feature) => {
-              const Icon = icons[feature.icon as keyof typeof icons];
+            {services.map((service, idx) => {
+              const Icon = icons[service.icon as keyof typeof icons];
               
               return (
                 <motion.div 
-                  key={feature.name} 
+                  key={service.name} 
                   className="relative pl-16 group"
-                  custom={feature.delay}
+                  custom={idx * 0.1}
                   variants={featureVariants}
                   initial="hidden"
                   animate={isInView ? "visible" : "hidden"}
@@ -217,9 +180,9 @@ export default function Services() {
                     >
                       <Icon className="size-6 text-white" />
                     </motion.div>
-                    <span>{feature.name}</span>
+                    <span>{service.name}</span>
                   </dt>
-                  <dd className="mt-3 text-base/7 text-gray-600">{feature.description}</dd>
+                  <dd className="mt-3 text-base/7 text-gray-600">{service.description}</dd>
                   
                   <motion.div 
                     initial={{ opacity: 0, width: 0 }}
