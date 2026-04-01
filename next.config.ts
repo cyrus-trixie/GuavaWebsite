@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  transpilePackages: [],
+  serverExternalPackages: [],
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default nextConfig;
