@@ -107,11 +107,7 @@ export default function Services() {
   );
 
   if (!services.length) {
-    return (
-      <div className="relative bg-white pb-12 overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6 lg:px-0 text-center">Loading services...</div>
-      </div>
-    );
+    null;
   }
 
   return (

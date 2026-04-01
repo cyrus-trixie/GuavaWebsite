@@ -55,14 +55,7 @@ export default function PortfolioCarousel() {
   }, [currentIndex, isDragging, hoveringNav, projects.length]);
 
   if (projects.length === 0) {
-    return (
-      <div className="relative w-full bg-black rounded-t-[50px] overflow-hidden min-h-[500px] flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p>Loading projects...</p>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   const handlePrev = () => {

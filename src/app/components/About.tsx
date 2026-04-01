@@ -77,11 +77,7 @@ export default function AboutGuavaCreative() {
   );
 
   if (!about) {
-    return (
-      <div className="relative bg-white overflow-hidden px-6 py-16 lg:px-0">
-        <div className="mx-auto max-w-6xl text-center">Loading...</div>
-      </div>
-    );
+    return null;
   }
 
   const titleParts: string[] = about.title.split('\n');

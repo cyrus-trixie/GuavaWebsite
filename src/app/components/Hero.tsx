@@ -22,11 +22,7 @@ export default function Hero() {
   }, []);
 
   if (!hero) {
-    return (
-      <div className="bg-black overflow-hidden h-[calc(100dvh-var(--header-height,80px))] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
-      </div>
-    );
+    return null;
   }
 
   return (
